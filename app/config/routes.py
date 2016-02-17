@@ -1,46 +1,34 @@
-"""
-    Routes Configuration File
-
-    Put Routing rules here
-"""
 from system.core.router import routes
 
-"""
-    This is where you define routes
-    
-    Start by defining the default controller
-    Pylot will look for the index method in the default controller to handle the base route
 
-    Pylot will also automatically generate routes that resemble: '/controller/method/parameters'
-    For example if you had a products controller with an add method that took one parameter 
-    named id the automatically generated url would be '/products/add/<id>'
-    The automatically generated routes respond to all of the http verbs (GET, POST, PUT, PATCH, DELETE)
-"""
-routes['default_controller'] = 'Welcome'
-"""
-    You can add routes and specify their handlers as follows:
+# // DEFAULT // 
+routes['default_controller'] = 'usersControllers'
 
-    routes['VERB']['/URL/GOES/HERE'] = 'Controller#method'
+# // ADD USER VIA POST DATA //
+routes['POST']['/register'] = 'usersControllers#register'
 
-    Note the '#' symbol to specify the controller method to use.
-    Note the preceding slash in the url.
-    Note that the http verb must be specified in ALL CAPS.
-    
-    If the http verb is not provided pylot will assume that you want the 'GET' verb.
+# // REDIRECT TO THE SUCCESS.HTML AFTER '/register' ADDS A USER TO THE DATABASE //
+routes['GET']['/dashboard'] = 'usersControllers#dashboard'
 
-    You can also use route parameters by using the angled brackets like so:
-    routes['PUT']['/users/<int:id>'] = 'users#update'
+# // LOG OUT //
+routes['GET']['/logout'] = 'usersControllers#logout'
 
-    Note that the parameter can have a specified type (int, string, float, path). 
-    If the type is not specified it will default to string
+# // LOG IN AS A PREVIOUS USER //
+routes['POST']['/login'] = 'usersControllers#login'
 
-    Here is an example of the restful routes for users:
+# // GO TO THE NEW.HTML PAGE //
+routes['GET']['/items/add'] = 'itemsControllers#new_item'
 
-    routes['GET']['/users'] = 'users#index'
-    routes['GET']['/users/new'] = 'users#new'
-    routes['POST']['/users'] = 'users#create'
-    routes['GET']['/users/<int:id>'] = 'users#show'
-    routes['GET']['/users/<int:id>/edit' = 'users#edit'
-    routes['PATCH']['/users/<int:id>'] = 'users#update'
-    routes['DELETE']['/users/<int:id>'] = 'users#destroy'
-"""
+# // ADD PRODUCT VIA POST DATA //
+routes['POST']['/items'] = 'itemsControllers#create_item'
+
+# // SHOW ITEM BY ID //
+routes['GET']['/items/<int:id>'] = 'itemsControllers#show'
+
+# // ADD ITEM TO MY WISHLIST //
+routes['POST']['/wishlists/<int:id>'] = 'itemsControllers#add_to_wishlist'
+
+# // DESTROY THE ITEM VIA POST DATA
+routes['POST']['/items/<int:id>'] = 'itemsControllers#destroy'
+
+routes['POST']['/wishlists/<int:id>/remove'] = 'itemsControllers#remove_favorite'

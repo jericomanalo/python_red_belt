@@ -1,0 +1,30 @@
+<html>
+<head>
+	<title>PRODUCTS</title>
+</head>
+<body>
+	<h1>Products</h1>
+	<h3><a href="/logout">Logout</a></h3>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Price</th>
+			<th>Actions</th>
+		</tr>
+		{% for product in allProducts %}
+		<tr>
+			<td>{{product['name']}}</td>
+			<td>{{product['description']}}</td>
+			<td>${{product['price']}}</td>
+			<td><a href="/products/{{product['id']}}">SHOW</a> <br> <a href="/products/{{product['id']}}/edit">EDIT</a> <br>
+				<form action = "/products/{{product['id']}}" method = 'post'>
+					<input type = 'hidden' name = 'id' value = "{{product['id']}}">
+					<input type = 'submit' name = 'destroy_product' value = 'Remove'>
+				</form></td>
+		</tr>
+		{% endfor %}
+	</table>
+	<h2><a href='/products/new'>Add a new product</a></h2>
+</body>
+</html>

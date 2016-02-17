@@ -1,0 +1,64 @@
+<html>
+<head>
+	<title>My Wishlist</title>
+</head>
+<body>
+	<h1>Hello, {{name}}!</h1>
+	<p>Your user ID is: {{session['id']}}</p>
+	<p><a href = '/logout'>Logout</a></p>
+	<p><a href='/items/add'>Add Item</a>	
+	<table>
+		<h2>Your wishlist</h2>
+		<tr>
+			<th>Item</th>
+			<th>Added by</th>
+			<th>Date added</th>
+			<th>Action</th>
+		</tr>
+		{% for item in wishlist %}
+		<tr>
+			<td><a href="/items/{{item['id']}}">{{item['name']}}</a></td>
+			<td></td>
+			<td>{{item['created_at']}}</td>
+			<td>
+				{% if item['user_id'] == session['id'] %}
+				<form action = "/items/{{item['id']}}" method = 'post'>
+					<input type = 'hidden' name = 'user_id' value = '{{id}}'>
+					<input type = 'submit' value = 'Delete Item'>
+				</form>
+				{% else %}
+				<form action = "/wishlists/{{item['id']}}/remove" method = 'post'>
+					<input type = 'hidden' name = 'user_id' value = '{{id}}'>
+					<input type = 'submit' value = 'Remove from my wishlist'>
+				</form>
+				{% endif %}
+
+			</td>
+		</tr>		
+		{% endfor %}
+	</table>
+
+	<table>
+		<h2>Items to be added to your wishlist</h2>
+		<tr>
+			<th>Item</th>
+			<th>Added by</th>
+			<th>Date added</th>
+			<th>Action</th>
+		</tr>
+		{% for item in allItems %}
+		<tr>
+			<td><a href="/items/{{item['id']}}">{{item['name']}}</a></td>
+			<td></td>
+			<td>{{item['created_at']}}</td>
+			<td>
+				<form action = "/wishlists/{{item['id']}}" method = 'post'>
+					<input type = 'hidden' name = 'user_id' value = '{{id}}'>
+					<input type = 'submit' value = 'Add to my wishlist'>
+				</form>
+			</td>
+		</tr>
+		{% endfor %}
+	</table>
+</body>
+</html>

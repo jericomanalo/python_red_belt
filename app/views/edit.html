@@ -1,0 +1,19 @@
+<html>
+<head>
+	<title>EDIT THIS PRODUCT BY ID</title>
+</head>
+<body>
+	<h1>EDIT THIS PRODUCT</h1>
+	<h1>USER ID: {{session['id']}}</h1>
+	{% for product in product %}
+	<form action = "/products/{{product['id']}}" method = 'post'>
+		Name: <input type = 'text' name = 'name' value = "{{product['name']}}"><br>
+		Description: <input type = 'text' name = 'description' value = "{{product['description']}}"><br>
+		Price: <input type = 'text' name = 'price' value = "{{product['price']}}"><br>
+		<input type = 'hidden' name = 'id' value = "{{product['id']}}">
+		<input type = 'submit' name = 'edit_product_form' value = 'Update'>
+	</form>
+	{% endfor %}
+	<h3><a href="/products">Go Back</a></h3>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<html>
+<head>
+	<title>Create Item</title>
+</head>
+<body>
+	<h1>Add a new Wishlist Item!</h1>
+	<h1>User ID: {{session['id']}}</h1>
+	<h3><a href="/dashboard">Home</a></h3>
+	<p><a href="/logout">Logout</a></p>
+	<form action = '/items' method = 'post'>
+		Item/Product: <input type = 'text' name = 'name'><br>
+		<input type = 'hidden' name = 'user_id' value = "{{session['id']}}">
+		<input type = 'submit' name = 'new_product_form' value = 'Add'>
+	</form>
+	<div id = 'errors'>
+		{% with errors = get_flashed_messages() %}
+			{% if errors %}
+				{% for error in errors %}
+					<p>{{error}}</p>
+				{% endfor %}
+			{% endif %}
+		{% endwith %}
+	</div>	
+</body>
+</html>

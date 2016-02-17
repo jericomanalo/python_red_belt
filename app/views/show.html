@@ -1,0 +1,13 @@
+{% for item in item %}
+<html>
+<head>
+	<title>{{item['name']}}</title>
+</head>
+<body>
+	<h1>{{item['name']}}</h1>
+	<h3><a href="/dashboard">Home</a></h3>
+	<h3><a href="/logout">Logout</a></h3>
+	<h4>Users who added this item onto their wishlists:</h4>
+</body>
+</html>
+{% endfor %}
